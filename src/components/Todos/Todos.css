@@ -1,0 +1,25 @@
+.todos-widget {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  padding-left: 50px;
+}
+
+.todos-widget-list {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.todos-widget-list-item {
+  margin: 3px;
+  width: 300px;
+  background-color: #2898ec;
+  text-align: center;
+  padding: 10px;
+  font-size: 0.9rem;
+  border-radius: 5px;
+  color: #fff;
+  display: inline-block;
+  border-width: 0px;
+}

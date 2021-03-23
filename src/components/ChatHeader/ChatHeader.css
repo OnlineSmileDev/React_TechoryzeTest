@@ -1,0 +1,29 @@
+.chat-header-view {
+  height: 60px;
+  background: lightgrey;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.chat-header-video-btn {
+  width: 100px;
+  border: none;
+  color: #fff;
+  background-color: transparent;
+}
+.chat-header-video-icon {
+  fill: #000;
+  width: 25px;
+  height: 25px;
+}
+.chat-header-cancel-btn {
+  width: 100px;
+  border: none;
+  color: #fff;
+  background-color: transparent;
+}
+.chat-header-cancel-icon {
+  fill: #000;
+  width: 30px;
+  height: 30px;
+}

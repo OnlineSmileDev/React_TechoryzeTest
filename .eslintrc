@@ -1,0 +1,18 @@
+{
+  "extends": [
+    "react-app",
+    "plugin:react/recommended"
+  ],
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "node": true,
+    "es6": true
+  },
+  "plugins": [
+      "prettier"
+  ],
+  "rules": {
+      "prettier/prettier": "error"
+  }
+}

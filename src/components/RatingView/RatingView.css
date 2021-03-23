@@ -1,0 +1,26 @@
+.todos-widget {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  padding-left: 50px;
+}
+.rating-widget-list-item {
+  margin: 3px;
+  min-width: 70px;
+  background-color: #2898ec;
+  text-align: center;
+  padding: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
+  font-size: 0.9rem;
+  border-radius: 5px;
+  color: #fff;
+  display: inline-block;
+  border-width: 0px;
+}
+.chat-rating-icon {
+  fill: gold;
+  width: 15px;
+  height: 15px;
+  margin-top: -3px;
+}
