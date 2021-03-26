@@ -144,6 +144,54 @@ class ActionProvider {
     });
   };
 
+  handleVideo = () => {
+    const message = this.createChatBotMessage(
+      'Do you want to use video chat?',
+      {
+        withAvatar: true,
+        widget: 'videoChatView',
+      }
+    );
+    this.addMessageToBotState(message);
+    socket.emit('sessionVideo', {
+      status: 'close',
+    });
+  };
+
+  handleAnswerEndVideo = (val) => {
+    const message = this.createClientMessage(val, {
+      withAvatar: true,
+    });
+    this.addMessageToBotState(message);
+    if (val === 'Yes') {
+      apiCall(ApiConstants.GET_CONVERSATION, 'GET').then((json) => {
+        const message1 = this.createChatBotMessage(
+          `Sure, Connecting you to ${json.data[0].expert} ...`,
+          {
+            withAvatar: true,
+          }
+        );
+        this.addMessageToBotState(message1);
+        socket.emit('sessionVideoOption', {
+          status: 'Yes',
+        });
+      });
+    } else {
+      apiCall(ApiConstants.GET_CONVERSATION, 'GET').then((json) => {
+        const message1 = this.createChatBotMessage(
+          `Sure. ${json.data[0].expert} is still here.`,
+          {
+            withAvatar: true,
+          }
+        );
+        this.addMessageToBotState(message1);
+        socket.emit('sessionVideoOption', {
+          status: 'No',
+        });
+      });
+    }
+  };
+
   addMessageToBotState = (messages) => {
     if (Array.isArray(messages)) {
       this.setState((state) => ({

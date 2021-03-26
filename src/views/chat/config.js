@@ -6,6 +6,7 @@ import ChatHeader from '../../components/ChatHeader/ChatHeader';
 import Todos from '../../components/Todos/Todos';
 import EndChatView from '../../components/EndChatView/EndChatView';
 import RatingView from '../../components/RatingView/RatingView';
+import VideoChatView from '../../components/VideoChatView/VideoChatView';
 
 const config = {
   initialMessages: [createChatBotMessage(`Hi, What's your name?`)],
@@ -29,6 +30,11 @@ const config = {
       widgetName: 'ratingView',
       widgetFunc: (props) => <RatingView {...props} />,
       mapStateToProps: ['ratingView'],
+    },
+    {
+      widgetName: 'videoChatView',
+      widgetFunc: (props) => <VideoChatView {...props} />,
+      mapStateToProps: ['videoChatView'],
     },
   ],
 };
