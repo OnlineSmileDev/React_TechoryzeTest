@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import Chatbot from 'react-chatbot-kit';
@@ -6,12 +7,16 @@ import ActionProvider from './ActionProvider';
 import config from './config';
 import apiCall from '../../libs/apiCall';
 import ApiConstants from '../../api/ApiConstants';
+import Video from './Video';
+import shortId from 'shortid';
+import socketIOClient from 'socket.io-client';
 
-const Main = () => {
+const socket = socketIOClient(ApiConstants.BASE_URL);
+
+export function Chat({ history }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log('-------------->>>>>>');
     apiCall(
       ApiConstants.CREATE_CONVERSATION,
       {
@@ -19,6 +24,9 @@ const Main = () => {
       },
       'POST'
     );
+    socket.on('incomingSessionVideoOption', (data) => {
+      setTimeout(() => history.push(`/${shortId.generate()}`), 2000);
+    });
   }, [dispatch]);
 
   return (
@@ -29,6 +37,4 @@ const Main = () => {
       headerText="User"
     />
   );
-};
-
-export default Main;
+}

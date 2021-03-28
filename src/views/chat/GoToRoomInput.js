@@ -20,13 +20,6 @@ export function GoToRoomInput({ history }) {
             setRoomId(event.target.value);
           }}
         />
-        <button
-          onClick={() => {
-            goToRoom(history, roomId);
-          }}
-        >
-          Enter
-        </button>
       </form>
     </div>
   );

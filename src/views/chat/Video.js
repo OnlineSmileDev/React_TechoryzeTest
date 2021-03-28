@@ -1,8 +1,10 @@
+/* eslint-disable react-hooks/rules-of-hooks */
+/* eslint-disable react/prop-types */
 import React from 'react';
-import VideoCall from '../helpers/simple-peer';
-import '../styles/video.css';
+import VideoCall from '../../helpers/simple-peer';
+import '../../styles/video.css';
 import io from 'socket.io-client';
-import { getDisplayStream } from '../helpers/media-access';
+import { getDisplayStream } from '../../helpers/media-access';
 import {
   ShareScreenIcon,
   MicOnIcon,
@@ -10,6 +12,8 @@ import {
   CamOnIcon,
   CamOffIcon,
 } from './Icons';
+import { BsX } from 'react-icons/bs';
+import { useHistory } from 'react-router-dom';
 
 class Video extends React.Component {
   constructor() {
@@ -38,6 +42,8 @@ class Video extends React.Component {
       socket.emit('join', { roomId: roomId });
     });
 
+    console.log(this.props.history);
+
     socket.on('init', () => {
       component.setState({ initiator: true });
     });
@@ -64,20 +70,17 @@ class Video extends React.Component {
         navigator.webkitGetUserMedia ||
         navigator.mozGetUserMedia;
       const op = {
-        video: {
-          width: { min: 160, ideal: 640, max: 1280 },
-          height: { min: 120, ideal: 360, max: 720 },
-        },
+        video: true,
         audio: true,
       };
-      navigator.getUserMedia(
-        op,
+
+      navigator.mediaDevices.getUserMedia({ video: {} }).then(
         (stream) => {
           this.setState({ streamUrl: stream, localStream: stream });
           this.localVideo.srcObject = stream;
           resolve();
         },
-        () => {}
+        (err) => console.error(err)
       );
     });
   }
@@ -150,9 +153,18 @@ class Video extends React.Component {
       return 'The room is full';
     }
   };
+
+  setGoback = () => {
+    console.log('==');
+    this.props.history.pop();
+  };
+
   render() {
     return (
       <div className="video-wrapper">
+        <div className="video-header-view">
+          <h>User</h>
+        </div>
         <div className="local-video-wrapper">
           <video
             autoPlay
@@ -161,15 +173,16 @@ class Video extends React.Component {
             ref={(video) => (this.localVideo = video)}
           />
         </div>
-        <video
-          autoPlay
-          className={`${
-            this.state.connecting || this.state.waiting ? 'hide' : ''
-          }`}
-          id="remoteVideo"
-          ref={(video) => (this.remoteVideo = video)}
-        />
-
+        <div className="local-video-wrapper1">
+          <video
+            autoPlay
+            className={`${
+              this.state.connecting || this.state.waiting ? 'hide' : ''
+            }`}
+            id="remoteVideo"
+            ref={(video) => (this.remoteVideo = video)}
+          />
+        </div>
         <div className="controls">
           <button
             className="control-btn"
@@ -199,6 +212,15 @@ class Video extends React.Component {
           </button>
         </div>
 
+        <button
+          className="control-close-btn"
+          onClick={() => {
+            this.setGoback();
+          }}
+        >
+          <BsX className="BsX" />
+        </button>
+
         {this.state.connecting && (
           <div className="status">
             <p>Establishing connection...</p>
@@ -209,7 +231,7 @@ class Video extends React.Component {
             <p>Waiting for someone...</p>
           </div>
         )}
-        {this.renderFull()}
+        {/* {this.renderFull()} */}
       </div>
     );
   }

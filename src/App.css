@@ -36,24 +36,28 @@
     transform: rotate(360deg);
   }
 }
-.react-chatbot-kit-chat-container {
-  width: 450px;
-  height: 80%;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+.App .react-chatbot-kit-chat-container {
+  width: 450px !important;
+  height: 80% !important;
+  position: absolute !important;
+  left: 50% !important;
+  top: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  -webkit-transform: translate(-50%, -50%) !important;
+  -moz-transform: translate(-50%, -50%) !important;
+  -ms-transform: translate(-50%, -50%) !important;
+  -o-transform: translate(-50%, -50%) !important;
 }
 .react-chatbot-kit-chat-bot-message {
-  margin-left: 0%;
+  margin-left: 0% !important;
 }
 .react-chatbot-kit-chat-inner-container {
-  height: 100%;
+  height: 100% !important;
 }
 .react-chatbot-kit-chat-message-container {
-  height: 85%;
+  height: 85% !important;
 }
 .react-chatbot-kit-chat-bot-message {
-  width: auto;
-  max-width: 300px;
+  width: auto !important;
+  max-width: 300px !important;
 }
