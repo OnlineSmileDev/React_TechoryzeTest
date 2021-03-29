@@ -7,7 +7,6 @@ import ActionProvider from './ActionProvider';
 import config from './config';
 import apiCall from '../../libs/apiCall';
 import ApiConstants from '../../api/ApiConstants';
-import Video from './Video';
 import shortId from 'shortid';
 import socketIOClient from 'socket.io-client';
 
@@ -25,7 +24,10 @@ export function Chat({ history }) {
       'POST'
     );
     socket.on('incomingSessionVideoOption', (data) => {
-      setTimeout(() => history.push(`/${shortId.generate()}`), 2000);
+      if (data.status === 'Yes') {
+        setTimeout(() => history.push(`/${shortId.generate()}`), 2000);
+        // setTimeout(() => history.push(`/111`), 2000);
+      }
     });
   }, [dispatch]);
 

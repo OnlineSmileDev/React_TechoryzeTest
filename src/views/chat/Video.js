@@ -13,7 +13,10 @@ import {
   CamOffIcon,
 } from './Icons';
 import { BsX } from 'react-icons/bs';
-import { useHistory } from 'react-router-dom';
+// import { useHistory } from 'react-router-dom';
+// import socketIOClient from 'socket.io-client';
+// import ApiConstants from '../../api/ApiConstants';
+// const socket = socketIOClient(ApiConstants.BASE_URL);
 
 class Video extends React.Component {
   constructor() {
@@ -41,8 +44,6 @@ class Video extends React.Component {
     this.getUserMedia().then(() => {
       socket.emit('join', { roomId: roomId });
     });
-
-    console.log(this.props.history);
 
     socket.on('init', () => {
       component.setState({ initiator: true });
@@ -155,8 +156,7 @@ class Video extends React.Component {
   };
 
   setGoback = () => {
-    console.log('==');
-    this.props.history.pop();
+    this.props.history.goBack();
   };
 
   render() {

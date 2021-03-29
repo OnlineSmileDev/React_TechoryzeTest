@@ -1,8 +1,8 @@
 import apiCall from '../../libs/apiCall';
 import ApiConstants from '../../api/ApiConstants';
 import socketIOClient from 'socket.io-client';
-
 const socket = socketIOClient(ApiConstants.BASE_URL);
+
 class ActionProvider {
   constructor(createChatBotMessage, setStateFunc, createClientMessage) {
     this.createChatBotMessage = createChatBotMessage;
