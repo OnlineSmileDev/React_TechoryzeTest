@@ -13,10 +13,6 @@ import {
   CamOffIcon,
 } from './Icons';
 import { BsX } from 'react-icons/bs';
-// import { useHistory } from 'react-router-dom';
-// import socketIOClient from 'socket.io-client';
-// import ApiConstants from '../../api/ApiConstants';
-// const socket = socketIOClient(ApiConstants.BASE_URL);
 
 class Video extends React.Component {
   constructor() {
@@ -75,7 +71,7 @@ class Video extends React.Component {
         audio: true,
       };
 
-      navigator.mediaDevices.getUserMedia({ video: {} }).then(
+      navigator.mediaDevices.getUserMedia(op).then(
         (stream) => {
           this.setState({ streamUrl: stream, localStream: stream });
           this.localVideo.srcObject = stream;
@@ -184,14 +180,14 @@ class Video extends React.Component {
           />
         </div>
         <div className="controls">
-          <button
+          {/* <button
             className="control-btn"
             onClick={() => {
               this.getDisplay();
             }}
           >
             <ShareScreenIcon />
-          </button>
+          </button> */}
 
           <button
             className="control-btn"

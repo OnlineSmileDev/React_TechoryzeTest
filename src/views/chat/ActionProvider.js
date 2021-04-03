@@ -57,6 +57,14 @@ class ActionProvider {
           );
           this.addMessageToBotState(message1);
         });
+      } else {
+        const message1 = this.createChatBotMessage(
+          `Another epxert is being connected for help`,
+          {
+            withAvatar: true,
+          }
+        );
+        this.addMessageToBotState(message1);
       }
     });
   };

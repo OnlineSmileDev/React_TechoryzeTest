@@ -45,10 +45,15 @@ class MessageParser {
     }
 
     if (this.state.messages.length > 7) {
-      socket.emit('message', {
-        text: message,
-        sender: '6047cb45047eabf185e8be81',
-        receiver: '6047cb45047eabf185e8be83',
+      apiCall(ApiConstants.GET_CONVERSATION, 'GET').then((json) => {
+        console.log('##', json.data[0].chat_accpet);
+        if (json.data[0].chat_accpet) {
+          socket.emit('message', {
+            text: message,
+            sender: '6047cb45047eabf185e8be81',
+            receiver: '6047cb45047eabf185e8be83',
+          });
+        }
       });
     }
   }
