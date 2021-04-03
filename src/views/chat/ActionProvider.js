@@ -44,14 +44,20 @@ class ActionProvider {
       }
     );
     this.addMessageToBotState(message);
-    apiCall(ApiConstants.GET_CONVERSATION, 'GET').then((json) => {
-      const message1 = this.createChatBotMessage(
-        `You are connected to ${json.data[0].expert}`,
-        {
-          withAvatar: true,
-        }
-      );
-      this.addMessageToBotState(message1);
+
+    socket.on('chatAccept', (data) => {
+      console.log('result:=========', data);
+      if (data) {
+        apiCall(ApiConstants.GET_CONVERSATION, 'GET').then((json) => {
+          const message1 = this.createChatBotMessage(
+            `You are connected to ${json.data[0].expert}`,
+            {
+              withAvatar: true,
+            }
+          );
+          this.addMessageToBotState(message1);
+        });
+      }
     });
   };
 
