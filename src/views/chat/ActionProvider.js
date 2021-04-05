@@ -46,7 +46,6 @@ class ActionProvider {
     this.addMessageToBotState(message);
 
     socket.on('chatAccept', (data) => {
-      console.log('result:=========', data);
       if (data) {
         apiCall(ApiConstants.GET_CONVERSATION, 'GET').then((json) => {
           const message1 = this.createChatBotMessage(

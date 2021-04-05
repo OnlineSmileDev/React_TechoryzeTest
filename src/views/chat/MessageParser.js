@@ -13,7 +13,6 @@ class MessageParser {
     const socket = socketIOClient(ApiConstants.BASE_URL);
 
     socket.on('incomingMessage', (data) => {
-      console.log('result:', data);
       this.actionProvider.realTimeMessage(data);
     });
 
@@ -31,7 +30,6 @@ class MessageParser {
     }
 
     if (this.state.messages.length === 5) {
-      // this.actionProvider.handleWorries();
       apiCall(
         ApiConstants.UPDATE_CONVERSATION,
         {
@@ -46,7 +44,6 @@ class MessageParser {
 
     if (this.state.messages.length > 7) {
       apiCall(ApiConstants.GET_CONVERSATION, 'GET').then((json) => {
-        console.log('##', json.data[0].chat_accpet);
         if (json.data[0].chat_accpet) {
           socket.emit('message', {
             text: message,
