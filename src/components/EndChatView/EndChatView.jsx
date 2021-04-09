@@ -1,9 +1,10 @@
 /* eslint-disable react/prop-types */
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from 'reactstrap';
 import './EndChatView.css';
 
 const EndChatView = (props) => {
+  const [visible, setVisible] = useState(true);
   const todos = [
     {
       id: 0,
@@ -24,7 +25,14 @@ const EndChatView = (props) => {
           key={tudo.id}
           className="todos-widget-list-item"
           variant="contained"
-          onClick={() => tudo.handler(tudo.title)}
+          onClick={
+            visible
+              ? () => {
+                  tudo.handler(tudo.title);
+                  setVisible(false);
+                }
+              : null
+          }
         >
           {tudo.title}
         </Button>

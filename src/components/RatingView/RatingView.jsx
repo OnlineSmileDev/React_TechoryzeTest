@@ -1,10 +1,11 @@
 /* eslint-disable react/prop-types */
-import React from 'react';
+import React, { useState } from 'react';
 // import { Button } from 'reactstrap';
 import { BsStarFill } from 'react-icons/bs';
 import './RatingView.css';
 
 const RatingView = (props) => {
+  const [visible, setVisible] = useState(true);
   const todos = [
     {
       id: 0,
@@ -39,8 +40,14 @@ const RatingView = (props) => {
         <button
           key={tudo.id}
           className="rating-widget-list-item"
-          // variant="contained"
-          onClick={() => tudo.handler(tudo.rating.length)}
+          onClick={
+            visible
+              ? () => {
+                  tudo.handler(tudo.rating.length);
+                  setVisible(false);
+                }
+              : null
+          }
         >
           {tudo.rating.map((item, index) => (
             <BsStarFill className="chat-rating-icon" key={index} />

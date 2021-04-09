@@ -5,6 +5,7 @@ import VideoCall from '../../helpers/simple-peer';
 import '../../styles/video.css';
 import io from 'socket.io-client';
 import { getDisplayStream } from '../../helpers/media-access';
+import ApiConstants from '../../api/ApiConstants';
 import {
   ShareScreenIcon,
   MicOnIcon,
@@ -33,11 +34,13 @@ class Video extends React.Component {
   videoCall = new VideoCall();
 
   componentDidMount() {
-    const socket = io(process.env.REACT_APP_SIGNALING_SERVER);
+    // const socket = io(process.env.REACT_APP_SIGNALING_SERVER);
+    const socket = io(ApiConstants.BASE_URL);
     const component = this;
     this.setState({ socket });
-    const { roomId } = this.props.match.params;
+    const roomId = this.props.roomId;
     this.getUserMedia().then(() => {
+      console.log('###$$', roomId);
       socket.emit('join', { roomId: roomId });
     });
 
@@ -152,7 +155,18 @@ class Video extends React.Component {
   };
 
   setGoback = () => {
-    this.props.history.goBack();
+    if (this.state.localStream.getAudioTracks().length > 0) {
+      this.state.localStream.getAudioTracks().forEach((track) => {
+        track.enabled = false;
+      });
+    }
+    if (this.state.localStream.getVideoTracks().length > 0) {
+      this.state.localStream.getVideoTracks().forEach((track) => {
+        track.enabled = false;
+      });
+    }
+    // this.props.history.goBack();
+    this.props.closeModal();
   };
 
   render() {

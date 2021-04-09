@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 import apiCall from '../../libs/apiCall';
 import ApiConstants from '../../api/ApiConstants';
 import socketIOClient from 'socket.io-client';
@@ -28,6 +29,17 @@ class MessageParser {
         'POST'
       );
     }
+
+    // if (this.state.messages.length === 3) {
+    //   console.log('1%%%', lowercase);
+    //   if (
+    //     lowercase != 'google' ||
+    //     lowercase != 'apple' ||
+    //     lowercase != 'microsoft'
+    //   ) {
+    //     this.actionProvider.handleAnswerEnvironment('Google');
+    //   }
+    // }
 
     if (this.state.messages.length === 5) {
       apiCall(
