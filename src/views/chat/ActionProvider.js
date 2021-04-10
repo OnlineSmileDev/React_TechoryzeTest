@@ -45,6 +45,10 @@ class ActionProvider {
     );
     this.addMessageToBotState(message);
 
+    socket.emit('sendingOfferToExpert', {
+      status: true,
+    });
+
     socket.on('chatAccept', (data) => {
       if (data) {
         apiCall(ApiConstants.GET_CONVERSATION, 'GET').then((json) => {
@@ -84,7 +88,7 @@ class ActionProvider {
     });
     this.addMessageToBotState(message);
     socket.emit('session', {
-      status: 'close',
+      status: true,
     });
   };
 
