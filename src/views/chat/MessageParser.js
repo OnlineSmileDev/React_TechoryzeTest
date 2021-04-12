@@ -30,17 +30,6 @@ class MessageParser {
       );
     }
 
-    // if (this.state.messages.length === 3) {
-    //   console.log('1%%%', lowercase);
-    //   if (
-    //     lowercase != 'google' ||
-    //     lowercase != 'apple' ||
-    //     lowercase != 'microsoft'
-    //   ) {
-    //     this.actionProvider.handleAnswerEnvironment('Google');
-    //   }
-    // }
-
     if (this.state.messages.length === 5) {
       apiCall(
         ApiConstants.UPDATE_CONVERSATION,
