@@ -10,7 +10,8 @@ class MessageParser {
   }
 
   async parse(message) {
-    console.log(this.state);
+    // console.log(this.state.messages);
+
     const socket = socketIOClient(ApiConstants.BASE_URL);
 
     socket.on('incomingMessage', (data) => {

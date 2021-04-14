@@ -219,6 +219,10 @@ class ActionProvider {
       this.setState((state) => {
         const lastMessage = state.messages[state.messages.length - 1];
         if (lastMessage.message !== messages.message) {
+          localStorage.setItem(
+            'chat_auto_messages2',
+            JSON.stringify(state.messages)
+          );
           return {
             ...state,
             messages: [...state.messages, messages],

@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import Chatbot from 'react-chatbot-kit';
 import MessageParser from './MessageParser';
@@ -29,8 +29,12 @@ const customStyles = {
 
 export function Chat({ history }) {
   const dispatch = useDispatch();
-  const [modalIsOpen, setIsOpen] = React.useState(false);
+  const [modalIsOpen, setIsOpen] = useState(false);
+  const [index, setIndex] = useState();
+
   useEffect(() => {
+    localStorage.setItem('chat_auto_messages2', JSON.stringify([]));
+    setIndex(0);
     apiCall(
       ApiConstants.CREATE_CONVERSATION,
       {
@@ -41,27 +45,37 @@ export function Chat({ history }) {
     socket.on('incomingSessionVideoOption', (data) => {
       if (data.status === 'Yes') {
         // setTimeout(() => history.push(`/${shortId.generate()}`), 2000);
-        // setTimeout(() => history.push(`/111`), 2000);
         setTimeout(() => setIsOpen(true), 3000);
       }
     });
   }, [dispatch]);
 
-  // function afterOpenModal() {
-  //   // references are now sync'd and can be accessed.
-  //   subtitle.style.color = '#f00';
-  // }
-
   function closeModal() {
     setIsOpen(false);
   }
+
+  const validator = (value) => {
+    const messages = JSON.parse(localStorage.getItem('chat_auto_messages2'));
+    console.log('===>', messages);
+
+    if (messages.length === 0) {
+      return true;
+    } else if (messages.length === 2) {
+      return;
+    } else if (messages.length === 4) {
+      return true;
+    } else {
+      return;
+    }
+  };
 
   return (
     <div>
       <Chatbot
         config={config}
-        messageParser={MessageParser}
         actionProvider={ActionProvider}
+        messageParser={MessageParser}
+        validator={validator}
         headerText="User"
       />
       <Modal
