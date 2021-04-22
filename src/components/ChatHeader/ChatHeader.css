@@ -1,9 +1,13 @@
 .chat-header-view {
   height: 60px;
-  background: lightgrey;
+  background: rgb(91, 115, 232);
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+.chat-header-name {
+  color: #fff;
+  size: 25px;
 }
 .chat-header-video-btn {
   width: 100px;
@@ -12,9 +16,9 @@
   background-color: transparent;
 }
 .chat-header-video-icon {
-  fill: #000;
-  width: 25px;
-  height: 25px;
+  fill: white;
+  width: 30px;
+  height: 30px;
 }
 .chat-header-cancel-btn {
   width: 100px;
@@ -23,7 +27,7 @@
   background-color: transparent;
 }
 .chat-header-cancel-icon {
-  fill: #000;
+  fill: #fff;
   width: 30px;
   height: 30px;
 }

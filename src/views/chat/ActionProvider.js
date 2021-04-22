@@ -82,13 +82,20 @@ class ActionProvider {
   };
 
   handleEndChat = () => {
-    const message = this.createChatBotMessage('Do you want to end the chat?', {
-      withAvatar: true,
-      widget: 'endChatView',
-    });
-    this.addMessageToBotState(message);
-    socket.emit('session', {
-      status: true,
+    apiCall(ApiConstants.GET_CONVERSATION, 'GET').then((json) => {
+      if (json.data[0].chat_accpet) {
+        const message = this.createChatBotMessage(
+          'Do you want to end the chat?',
+          {
+            withAvatar: true,
+            widget: 'endChatView',
+          }
+        );
+        this.addMessageToBotState(message);
+        socket.emit('session', {
+          status: true,
+        });
+      }
     });
   };
 
@@ -162,16 +169,20 @@ class ActionProvider {
   };
 
   handleVideo = () => {
-    const message = this.createChatBotMessage(
-      'Do you want to use video chat?',
-      {
-        withAvatar: true,
-        widget: 'videoChatView',
+    apiCall(ApiConstants.GET_CONVERSATION, 'GET').then((json) => {
+      if (json.data[0].chat_accpet) {
+        const message = this.createChatBotMessage(
+          'Do you want to use video chat?',
+          {
+            withAvatar: true,
+            widget: 'videoChatView',
+          }
+        );
+        this.addMessageToBotState(message);
+        socket.emit('sessionVideo', {
+          status: 'close',
+        });
       }
-    );
-    this.addMessageToBotState(message);
-    socket.emit('sessionVideo', {
-      status: 'close',
     });
   };
 
@@ -221,7 +232,7 @@ class ActionProvider {
         if (lastMessage.message !== messages.message) {
           localStorage.setItem(
             'chat_auto_messages2',
-            JSON.stringify(state.messages)
+            JSON.stringify([...state.messages, messages])
           );
           return {
             ...state,

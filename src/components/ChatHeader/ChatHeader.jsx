@@ -1,7 +1,8 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import './ChatHeader.css';
-import { BsFillCameraVideoFill, BsX } from 'react-icons/bs';
+import { BsCameraVideo, BsX } from 'react-icons/bs';
+import { VscDeviceCameraVideo } from 'react-icons/vsc';
 
 const ChatHeader = (props) => {
   const handleEndChat = (e) => {
@@ -15,9 +16,9 @@ const ChatHeader = (props) => {
   return (
     <div className="chat-header-view">
       <button className="chat-header-video-btn" onClick={() => handleVideo()}>
-        <BsFillCameraVideoFill className="chat-header-video-icon" />
+        <VscDeviceCameraVideo className="chat-header-video-icon" />
       </button>
-      <h>User</h>
+      <h className="chat-header-name">Evgen Ropaiev</h>
       <button
         className="chat-header-cancel-btn"
         onClick={() => handleEndChat()}

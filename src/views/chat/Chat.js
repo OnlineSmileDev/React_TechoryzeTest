@@ -16,25 +16,17 @@ const socket = socketIOClient(ApiConstants.BASE_URL);
 
 const customStyles = {
   content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
-    width: 450,
-    height: '80%',
+    width: 'auto',
+    height: 'auto',
   },
 };
 
 export function Chat({ history }) {
   const dispatch = useDispatch();
   const [modalIsOpen, setIsOpen] = useState(false);
-  const [index, setIndex] = useState();
 
   useEffect(() => {
     localStorage.setItem('chat_auto_messages2', JSON.stringify([]));
-    setIndex(0);
     apiCall(
       ApiConstants.CREATE_CONVERSATION,
       {
@@ -56,14 +48,31 @@ export function Chat({ history }) {
 
   const validator = (value) => {
     const messages = JSON.parse(localStorage.getItem('chat_auto_messages2'));
-    console.log('===>', messages);
 
     if (messages.length === 0) {
-      return true;
-    } else if (messages.length === 2) {
+      return /^[A-Za-z][A-Za-z\'\-]*/.test(value);
+    } else if (messages.length === 3) {
       return;
-    } else if (messages.length === 4) {
+    } else if (messages.length === 5) {
       return true;
+    } else if (messages.length >= 8) {
+      if (
+        messages[messages.length - 1].message ===
+        'Another epxert is being connected for help'
+      ) {
+        return;
+      } else if (
+        messages[messages.length - 1].message ===
+          'Do you want to end the chat?' ||
+        messages[messages.length - 1].message.includes('OK. How did') ||
+        messages[messages.length - 1].message.includes(
+          'Do you want to use video chat'
+        )
+      ) {
+        return;
+      } else {
+        return true;
+      }
     } else {
       return;
     }
@@ -76,7 +85,7 @@ export function Chat({ history }) {
         actionProvider={ActionProvider}
         messageParser={MessageParser}
         validator={validator}
-        headerText="User"
+        headerText="Evgen Ropaiev"
       />
       <Modal
         isOpen={modalIsOpen}

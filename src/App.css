@@ -37,6 +37,7 @@
   }
 }
 .App .react-chatbot-kit-chat-container {
+  border: 2px solid rgb(91, 115, 232);
   width: 450px !important;
   height: 80% !important;
   position: absolute !important;
@@ -60,4 +61,13 @@
 .react-chatbot-kit-chat-bot-message {
   width: auto !important;
   max-width: 300px !important;
+}
+.react-chatbot-kit-chat-message-container {
+  overflow: auto;
+}
+.react-chatbot-kit-chat-btn-send {
+  border-bottom-right-radius: 0px;
+}
+.react-chatbot-kit-chat-input-container {
+  border-top: 2px solid rgb(91, 115, 232);
 }

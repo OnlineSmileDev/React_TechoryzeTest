@@ -14,6 +14,8 @@ import {
   CamOffIcon,
 } from './Icons';
 import { BsX } from 'react-icons/bs';
+import apiCall from '../../libs/apiCall';
+const socket = io(ApiConstants.BASE_URL);
 
 class Video extends React.Component {
   constructor() {
@@ -35,7 +37,7 @@ class Video extends React.Component {
 
   componentDidMount() {
     // const socket = io(process.env.REACT_APP_SIGNALING_SERVER);
-    const socket = io(ApiConstants.BASE_URL);
+
     const component = this;
     this.setState({ socket });
     const roomId = this.props.roomId;
@@ -59,6 +61,22 @@ class Video extends React.Component {
     });
     socket.on('full', () => {
       component.setState({ full: true });
+    });
+
+    socket.on('videoChatAccept', (data) => {
+      if (this.state.localStream.getAudioTracks().length > 0) {
+        this.state.localStream.getAudioTracks().forEach((track) => {
+          track.enabled = false;
+        });
+      }
+      if (this.state.localStream.getVideoTracks().length > 0) {
+        this.state.localStream.getVideoTracks().forEach((track) => {
+          track.enabled = false;
+        });
+      }
+      // this.props.history.goBack();
+      window.location.reload();
+      this.props.closeModal();
     });
   }
 
@@ -154,6 +172,16 @@ class Video extends React.Component {
   };
 
   setGoback = () => {
+    apiCall(
+      ApiConstants.UPDATE_CONVERSATION,
+      {
+        key: 'chat_accpet',
+        value: false,
+      },
+      'POST'
+    );
+    socket.emit('videoChatAccept', true);
+
     if (this.state.localStream.getAudioTracks().length > 0) {
       this.state.localStream.getAudioTracks().forEach((track) => {
         track.enabled = false;
@@ -165,6 +193,7 @@ class Video extends React.Component {
       });
     }
     // this.props.history.goBack();
+    window.location.reload();
     this.props.closeModal();
   };
 
@@ -174,23 +203,25 @@ class Video extends React.Component {
         <div className="video-header-view">
           <h>User</h>
         </div>
-        <div className="local-video-wrapper">
-          <video
-            autoPlay
-            id="localVideo"
-            muted
-            ref={(video) => (this.localVideo = video)}
-          />
-        </div>
-        <div className="local-video-wrapper1">
-          <video
-            autoPlay
-            className={`${
-              this.state.connecting || this.state.waiting ? 'hide' : ''
-            }`}
-            id="remoteVideo"
-            ref={(video) => (this.remoteVideo = video)}
-          />
+        <div className="local-video-wrapper-container">
+          <div className="local-video-wrapper">
+            <video
+              autoPlay
+              id="localVideo"
+              muted
+              ref={(video) => (this.localVideo = video)}
+            />
+          </div>
+          <div className="local-video-wrapper1">
+            <video
+              autoPlay
+              className={`${
+                this.state.connecting || this.state.waiting ? 'hide' : ''
+              }`}
+              id="remoteVideo"
+              ref={(video) => (this.remoteVideo = video)}
+            />
+          </div>
         </div>
         <div className="controls">
           {/* <button

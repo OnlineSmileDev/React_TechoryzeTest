@@ -15,6 +15,15 @@ const config = {
     botAvatar: (props) => <BotAvatar {...props} />,
     header: (props) => <ChatHeader {...props} />,
   },
+  customStyles: {
+    botMessageBox: {
+      backgroundColor: 'rgb(91, 115, 232)',
+    },
+    chatButton: {
+      backgroundColor: 'rgb(91, 115, 232)',
+      borderBottomRightRadius: '20px',
+    },
+  },
   widgets: [
     {
       widgetName: 'todos',
