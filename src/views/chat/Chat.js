@@ -16,8 +16,15 @@ const socket = socketIOClient(ApiConstants.BASE_URL);
 
 const customStyles = {
   content: {
-    width: 'auto',
-    height: 'auto',
+    width: '450px',
+    height: '80%',
+    position: 'absolute',
+    left: '50%',
+    top: '50%',
+    transform: 'translate(-50%, -50%)',
+    overflow: 'hidden',
+    padding: 0,
+    border: '2px solid rgb(91, 115, 232)',
   },
 };
 
@@ -36,7 +43,6 @@ export function Chat({ history }) {
     );
     socket.on('incomingSessionVideoOption', (data) => {
       if (data.status === 'Yes') {
-        // setTimeout(() => history.push(`/${shortId.generate()}`), 2000);
         setTimeout(() => setIsOpen(true), 3000);
       }
     });

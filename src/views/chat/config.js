@@ -2,6 +2,7 @@
 import React from 'react';
 import { createChatBotMessage } from 'react-chatbot-kit';
 import BotAvatar from '../../components/BotAvatar/BotAvatar';
+import UserAvatar from '../../components/UserAvatar/UserAvatar';
 import ChatHeader from '../../components/ChatHeader/ChatHeader';
 import Todos from '../../components/Todos/Todos';
 import EndChatView from '../../components/EndChatView/EndChatView';
@@ -13,6 +14,7 @@ const config = {
   botName: 'T',
   customComponents: {
     botAvatar: (props) => <BotAvatar {...props} />,
+    userAvatar: (props) => <UserAvatar {...props} />,
     header: (props) => <ChatHeader {...props} />,
   },
   customStyles: {

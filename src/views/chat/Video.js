@@ -172,15 +172,15 @@ class Video extends React.Component {
   };
 
   setGoback = () => {
-    apiCall(
-      ApiConstants.UPDATE_CONVERSATION,
-      {
-        key: 'chat_accpet',
-        value: false,
-      },
-      'POST'
-    );
-    socket.emit('videoChatAccept', true);
+    // apiCall(
+    //   ApiConstants.UPDATE_CONVERSATION,
+    //   {
+    //     key: 'chat_accpet',
+    //     value: false,
+    //   },
+    //   'POST'
+    // );
+    // socket.emit('videoChatAccept', true);
 
     if (this.state.localStream.getAudioTracks().length > 0) {
       this.state.localStream.getAudioTracks().forEach((track) => {
@@ -193,7 +193,7 @@ class Video extends React.Component {
       });
     }
     // this.props.history.goBack();
-    window.location.reload();
+    // window.location.reload();
     this.props.closeModal();
   };
 
@@ -201,17 +201,55 @@ class Video extends React.Component {
     return (
       <div className="video-wrapper">
         <div className="video-header-view">
-          <h>User</h>
+          <h className="video-header-text">Evgen Ropaiev</h>
+          <button
+            className="back-btn"
+            onClick={() => {
+              this.setGoback();
+            }}
+          >
+            <BsX className="back-icon" />
+          </button>
         </div>
+
         <div className="local-video-wrapper-container">
           <div className="local-video-wrapper">
             <video
               autoPlay
               id="localVideo"
               muted
+              resizeMode={'contain'}
+              controls={true}
               ref={(video) => (this.localVideo = video)}
             />
           </div>
+          <div className="controls">
+            <button
+              className="control-btn"
+              onClick={() => {
+                this.setAudioLocal();
+              }}
+            >
+              {this.state.micState ? <MicOnIcon /> : <MicOffIcon />}
+            </button>
+            <button
+              className="control-btn"
+              onClick={() => {
+                this.getDisplay();
+              }}
+            >
+              <ShareScreenIcon />
+            </button>
+            <button
+              className="control-btn"
+              onClick={() => {
+                this.setVideoLocal();
+              }}
+            >
+              {this.state.camState ? <CamOnIcon /> : <CamOffIcon />}
+            </button>
+          </div>
+
           <div className="local-video-wrapper1">
             <video
               autoPlay
@@ -223,43 +261,6 @@ class Video extends React.Component {
             />
           </div>
         </div>
-        <div className="controls">
-          {/* <button
-            className="control-btn"
-            onClick={() => {
-              this.getDisplay();
-            }}
-          >
-            <ShareScreenIcon />
-          </button> */}
-
-          <button
-            className="control-btn"
-            onClick={() => {
-              this.setAudioLocal();
-            }}
-          >
-            {this.state.micState ? <MicOnIcon /> : <MicOffIcon />}
-          </button>
-
-          <button
-            className="control-btn"
-            onClick={() => {
-              this.setVideoLocal();
-            }}
-          >
-            {this.state.camState ? <CamOnIcon /> : <CamOffIcon />}
-          </button>
-        </div>
-
-        <button
-          className="control-close-btn"
-          onClick={() => {
-            this.setGoback();
-          }}
-        >
-          <BsX className="BsX" />
-        </button>
 
         {this.state.connecting && (
           <div className="status">

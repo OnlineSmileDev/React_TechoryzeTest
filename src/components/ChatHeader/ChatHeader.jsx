@@ -1,8 +1,11 @@
 /* eslint-disable react/prop-types */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './ChatHeader.css';
 import { BsCameraVideo, BsX } from 'react-icons/bs';
 import { VscDeviceCameraVideo } from 'react-icons/vsc';
+import ApiConstants from '../../api/ApiConstants';
+import socketIOClient from 'socket.io-client';
+const socket = socketIOClient(ApiConstants.BASE_URL);
 
 const ChatHeader = (props) => {
   const handleEndChat = (e) => {
@@ -13,10 +16,23 @@ const ChatHeader = (props) => {
     return props.handleVideo();
   };
 
+  const [modalIsOpen, setIsOpen] = useState(false);
+  useEffect(() => {
+    socket.on('chatAccept', (data) => {
+      if (data) {
+        setIsOpen(true);
+      } else {
+        setIsOpen(false);
+      }
+    });
+  }, []);
+
   return (
     <div className="chat-header-view">
       <button className="chat-header-video-btn" onClick={() => handleVideo()}>
-        <VscDeviceCameraVideo className="chat-header-video-icon" />
+        {modalIsOpen && (
+          <VscDeviceCameraVideo className="chat-header-video-icon" />
+        )}
       </button>
       <h className="chat-header-name">Evgen Ropaiev</h>
       <button

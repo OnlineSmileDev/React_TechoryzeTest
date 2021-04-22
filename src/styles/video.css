@@ -1,35 +1,31 @@
-.local-video-wrapper-container {
-  justify-content: center;
-  width: '100%';
-  height: '100%';
-  margin-top: 50px;
-  display: flex;
-  flex-direction: row;
-}
-.local-video-wrapper {
-  display: flex;
-}
-.local-video-wrapper1 {
-  display: flex;
-}
-#localVideo {
-  width: 300px;
-  height: 300px;
-  border-radius: 4px;
-  display: block;
-}
 .video-wrapper {
   width: 100%;
   height: 100%;
-  background: #252839;
+  background-color: #fff;
+}
+.local-video-wrapper-container {
   justify-content: center;
+  width: 100%;
+  height: 90%;
+}
+.local-video-wrapper {
+  height: 45%;
+  width: 100%;
+  background-color: #fff;
+}
+.local-video-wrapper1 {
+  height: 45%;
+  width: 100%;
+}
+#localVideo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 #remoteVideo {
-  background: yellow;
-  margin: 0 auto;
-  margin-left: 150px;
-  height: 100%;
   width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 #remoteVideo.hide {
   display: none;
@@ -41,25 +37,21 @@
   color: greenyellow;
   height: 50vh;
 }
-
 .controls{
-  position: absolute;
-  bottom: 130px;
-  left: 40%;
-  right: 40%;
-  width: 20%;
+  width: 100%;
+  height: 10%;
   display: flex;
+  padding-left: 70px;
+  padding-right: 70px;
   justify-content: space-between;
+  background-color:rgb(91, 115, 232);
 }
 .control-btn{
   position: relative;
   background: transparent;
   outline: none;
   border: none;
-  box-shadow: 1px 1px 8px black;
   border-radius: 50%;
-  background-color: #252839;
-  height: 64px;
   width: 64px;
 }
 .control-close-btn {
@@ -68,7 +60,7 @@
   border: none;
   box-shadow: 1px 1px 8px black;
   border-radius: 50%;
-  background-color: #252839;
+  background-color: #fff;
   height: 64px;
   width: 64px;
   position: absolute;
@@ -77,11 +69,29 @@
   margin-left: -32px;
 }
 .video-header-view {
-  height: 60px;
-  background: lightgreen;
+  height: 10%;
+  background: rgb(91, 115, 232);
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.video-header-text {
+  color: #fff;
+  size: 25px;
+}
+.back-btn {
+  position: absolute;
+  right: 10px;
+  background: transparent;
+  outline: none;
+  border: none;
+  height: 64px;
+  width: 64px;
+}
+.back-icon {
+  color: white;
+  width: 30px;
+  height: 30px;
 }
 
 @media screen and (max-width: 480px) {
@@ -92,7 +102,6 @@
   #remoteVideo {
     width: 100%;
     height: auto;
-    margin-top: 20%;
   }
 }
 
