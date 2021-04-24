@@ -10,8 +10,6 @@ class App extends Component {
         <React.Fragment>
           <div className="App">
             <Route path="/" exact component={Chat} className="App" />
-            <Route path="/:roomId" exact component={Video} />
-            {/* <Chat /> */}
           </div>
         </React.Fragment>
       </BrowserRouter>

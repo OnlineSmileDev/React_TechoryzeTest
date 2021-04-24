@@ -36,8 +36,6 @@ class Video extends React.Component {
   videoCall = new VideoCall();
 
   componentDidMount() {
-    // const socket = io(process.env.REACT_APP_SIGNALING_SERVER);
-
     const component = this;
     this.setState({ socket });
     const roomId = this.props.roomId;
@@ -74,7 +72,6 @@ class Video extends React.Component {
           track.enabled = false;
         });
       }
-      // this.props.history.goBack();
       window.location.reload();
       this.props.closeModal();
     });
@@ -172,16 +169,6 @@ class Video extends React.Component {
   };
 
   setGoback = () => {
-    // apiCall(
-    //   ApiConstants.UPDATE_CONVERSATION,
-    //   {
-    //     key: 'chat_accpet',
-    //     value: false,
-    //   },
-    //   'POST'
-    // );
-    // socket.emit('videoChatAccept', true);
-
     if (this.state.localStream.getAudioTracks().length > 0) {
       this.state.localStream.getAudioTracks().forEach((track) => {
         track.enabled = false;
@@ -192,8 +179,6 @@ class Video extends React.Component {
         track.enabled = false;
       });
     }
-    // this.props.history.goBack();
-    // window.location.reload();
     this.props.closeModal();
   };
 
@@ -272,7 +257,6 @@ class Video extends React.Component {
             <p>Waiting for someone...</p>
           </div>
         )}
-        {/* {this.renderFull()} */}
       </div>
     );
   }
