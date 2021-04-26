@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
-// import { Button } from 'reactstrap';
 import { BsStarFill } from 'react-icons/bs';
 import './RatingView.css';
 

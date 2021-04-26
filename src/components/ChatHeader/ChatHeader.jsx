@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react';
 import './ChatHeader.css';
-import { BsCameraVideo, BsX } from 'react-icons/bs';
+import { BsX } from 'react-icons/bs';
 import { VscDeviceCameraVideo } from 'react-icons/vsc';
 import ApiConstants from '../../api/ApiConstants';
 import socketIOClient from 'socket.io-client';
